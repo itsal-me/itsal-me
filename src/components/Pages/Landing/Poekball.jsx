@@ -3,11 +3,32 @@
 import { Suspense, useRef, useState, useEffect} from "react"
 import { Html, OrbitControls, useGLTF } from "@react-three/drei"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
+import gsap from "gsap"
+import ScrollTrigger from "gsap/ScrollTrigger"
 import Navbar from "../../Navigation/Navbar"
 
+
 const Model = ({ scale }) => {
+
+
   const { scene } = useGLTF("assets/models/pokemon_basic_pokeball.glb")
-  return <primitive object={scene} position={[0, 0, 0]} scale={scale} />
+
+  const modelRef = useRef()
+
+  useEffect(() => {
+    if (modelRef.current){
+      gsap.to(modelRef.current.position, {
+        y: 0.5,
+        duration: 1.5,
+        repeat: -1,
+        ease: 'power1.inOut',
+        yoyo: true
+        
+      })
+    }
+  }, [])
+ 
+  return <primitive ref={modelRef} object={scene} position={[0, 0, 0]} scale={scale} />
 }
 
 const CameraControls = ({ setCameraRotation }) => {
@@ -64,7 +85,7 @@ export default function Pokeball({ onClick }) {
 
 
 
-  const [scale, setScale] = useState([0.5, 0.5, 0.5])
+  const [scale, setScale] = useState([0.4, 0.4, 0.4])
 
   const segSize = (2 * Math.PI) / colors.length
   const normalizedRotation = (cameraRotation + 2 * Math.PI) % (2 * Math.PI)
@@ -89,7 +110,7 @@ export default function Pokeball({ onClick }) {
       } 
       
       else {
-        setScale([0.5, 0.5, 0.5])
+        setScale([0.4, 0.4, 0.4])
       }
     }
     window.addEventListener("resize", handleResize)

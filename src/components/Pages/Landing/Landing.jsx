@@ -1,11 +1,16 @@
 
 
 import { motion } from "framer-motion"
+import { useEffect } from "react"
+import gsap from "gsap"
 
 export default function Landing(props){
+
+
+
   return(
     <div
-    className="flex flex-col items-center justify-center h-screen bg-black"
+    className="landing flex flex-col items-center justify-center h-screen bg-black"
     >
       <motion.button
       onClick={props.onStart}
