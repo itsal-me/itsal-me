@@ -10,3 +10,20 @@
 html{
   scroll-behavior: smooth;
 }
+
+/* To hide the scrollbar in WebKit browsers */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* In Firefox */
+html {
+  scrollbar-width: none;
+}
+
+
+.nav{
+  position: absolute;
+}
+
+
